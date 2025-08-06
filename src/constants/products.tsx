@@ -6,8 +6,65 @@ import dishriders from "public/images/dish-riders.png";
 import cresa from "public/images/cresa.png";
 import dishrest from "public/images/dish-rest.png";
 import pfhixtech from "public/images/pfhixtech.png";
+import hub from "public/images/hub.png";
+import hub2 from "public/images/hub2.png";
+import hub3 from "public/images/hub3.png";
 
 export const products = [
+	{
+		href: "https://pesta-ticketr.vercel.app",
+		title: "Tickethub-Event Ticketing Platform",
+		description:
+			"A web app where users can create, manage, and purchase event tickets—with fast onboarding, secure payments, and automatic refunds.",
+		thumbnail: hub2,
+		images: [hub, hub2, hub3],
+		stack: [
+			"Nextjs",
+			"Tailwindcss",
+			"shadcn/ui",
+			"Typescript",
+			"Clerk",
+			"Paystack",
+			"Convex",
+		],
+		slug: "event-ticketing-platform",
+		content: (
+			<div>
+				<p>
+					I engineered the Event Ticketing Platform—a comprehensive application
+					that simplifies event organization and ticket sales. Using{" "}
+					<b>Next.js</b> and <b>TypeScript</b> for a robust frontend, the
+					platform enables organizers to create, update, and monitor events
+					through an intuitive dashboard. <b>Tailwind CSS</b> and{" "}
+					<b>shadcn/ui</b> deliver a polished and responsive user interface.
+					Authentication is secured via <b>Clerk</b>, ensuring attendee data
+					protection.
+				</p>
+
+				<p>
+					The platform automates payments and payouts using <b>Paystack</b>,
+					with seamless seller onboarding for subaccount creation. Data storage
+					and real-time updates run on <b>Convex</b>, ensuring reliability and
+					performance at scale. Attendees can browse, purchase, and get instant
+					confirmations for tickets, while organizers benefit from automated
+					refund processing if events are cancelled. The application’s scalable
+					architecture supports future feature integration and growing user
+					demands.
+				</p>
+
+				<p>
+					A strong focus on developer experience is reflected in clear project
+					documentation, an organized codebase, and straightforward
+					deployment—recommended via <b>Vercel</b>. All critical flows,
+					including environment setup, onboarding, ticket buying, and refund
+					processing, are carefully documented and tested. This project
+					highlights the seamless integration of modern technologies and best
+					development practices, resulting in a reliable, scalable, and
+					user-friendly event management solution.
+				</p>
+			</div>
+		),
+	},
 	{
 		href: "https://cabwire.com",
 		title: "Cabwire",
