@@ -1,5 +1,30 @@
 export const timeline = [
 	{
+		company: "49GIG",
+		title: "Fullstack Developer, CTO",
+		date: "Dec 2025 - Present",
+		description:
+			"Architecting and leading 49GIG, a high-trust freelance marketplace where clients pre-fund projects and work only with fully vetted talent.",
+		responsibilities: [
+			"Designed and implemented a zero-trust, server-side authorization model with role-based dashboards, protected routes, and real-time collaboration features.",
+			"Led end-to-end system design across a 14-phase architecture, including Convex data modeling, Zustand store structure, security (RBAC, rate limiting, CSRF), and a 30-day delivery roadmap.",
+			"Implemented a multi-layer freelancer verification pipeline covering identity, English, and skills assessment with weighted scoring and anti-fraud checks (IP/device/session analysis).",
+			"Integrated milestone-based escrow, Stripe-powered payment flows via webhooks, real-time project intake and matching, disputes handling, and detailed audit logging for sensitive operations.",
+		],
+	},
+	{
+		company: "Tubira.ai",
+		title: "Full Stack Developer (Contract)",
+		date: "Nov 2025",
+		description:
+			"Built the affiliate platform for Tubira, a unified vacation and travel booking marketplace that connects travelers with flights, hotels, activities, and more in one checkout.",
+		responsibilities: [
+			"Implemented the core affiliate experience for Tubira’s global travel marketplace, integrating flights, hotels, activities, car rentals, and eSIMs into a single, streamlined booking flow.",
+			"Designed and developed partner-facing features for tracking referrals, commissions, and payouts, supporting multi-currency payments and high-value, multi-product bookings.",
+			"Collaborated on secure, transparent affiliate analytics and reporting to support 1000+ partners across 50+ countries, ensuring reliable tracking windows and commission adjustments for refunds.",
+		],
+	},
+	{
 		company: "Dishpatch Global",
 		title: "Full Stack Next.js Developer",
 		date: "2024 - Present",
