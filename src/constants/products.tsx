@@ -42,7 +42,7 @@ export const products = [
 			"Typescript",
 			"Convex",
 			"Zustand",
-			"Stripe",
+			"Flutterwave",
 		],
 		slug: "49gig-freelance-marketplace",
 		content: (
@@ -80,7 +80,7 @@ export const products = [
 			"Affiliate platform for Tubira, a unified vacation and travel marketplace for flights, hotels, activities, and more in one checkout.",
 		thumbnail: tb1,
 		images: [tb1, tb2, tb3, tb4],
-		stack: ["Nextjs", "Tailwindcss", "Typescript"],
+		stack: ["Nextjs", "Tailwindcss", "Typescript", "Convex", "Zustand", "Stripe"],
 		slug: "tubira-affiliate-platform",
 		content: (
 			<div>
@@ -115,7 +115,7 @@ export const products = [
 			"A QR-based attendance and documentation platform for NYSC CDS groups in Akure South LGA, replacing manual roll calls with real-time dashboards and reports.",
 		thumbnail: nysc1,
 		images: [nysc1, nysc2, nysc3, nysc4, nysc5, nysc6],
-		stack: ["Nextjs", "Tailwindcss", "Typescript"],
+		stack: ["Nextjs", "Tailwindcss", "Typescript", "Convex", "Zustand", "TanStack Query"],
 		slug: "nysc-cds-attendance-system",
 		content: (
 			<div>
