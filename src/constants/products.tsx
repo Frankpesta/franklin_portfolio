@@ -1,3 +1,4 @@
+import React from "react";
 import cabwire from "public/images/cabwire.png";
 import linkedcart from "public/images/linkedcart.png";
 import benjalabs from "public/images/benjalabs.png";
@@ -9,8 +10,148 @@ import pfhixtech from "public/images/pfhixtech.png";
 import hub from "public/images/hub.png";
 import hub2 from "public/images/hub2.png";
 import hub3 from "public/images/hub3.png";
+import gig1 from "public/images/49g1.png";
+import gig2 from "public/images/49g2.png";
+import gig3 from "public/images/49g3.png";
+import gig4 from "public/images/49g4.png";
+import gig5 from "public/images/49g5.png";
+import gig6 from "public/images/49g6.png";
+import tb1 from "public/images/tb1.png";
+import tb2 from "public/images/tb2.png";
+import tb3 from "public/images/tb3.png";
+import tb4 from "public/images/tb4.png";
+import nysc1 from "public/images/nysc1.png";
+import nysc2 from "public/images/nysc2.png";
+import nysc3 from "public/images/nysc3.png";
+import nysc4 from "public/images/nysc4.png";
+import nysc5 from "public/images/nysc5.png";
+import nysc6 from "public/images/nysc6.png";
 
 export const products = [
+	{
+		href: "https://49gig.com",
+		title: "49GIG — Curated Freelance Marketplace",
+		description:
+			"A high-trust freelance marketplace where clients pre-fund projects and work only with fully vetted, verified talent.",
+		thumbnail: gig1,
+		images: [gig1, gig2, gig3, gig4, gig5, gig6],
+		stack: [
+			"Nextjs",
+			"Tailwindcss",
+			"shadcn/ui",
+			"Typescript",
+			"Convex",
+			"Zustand",
+			"Stripe",
+		],
+		slug: "49gig-freelance-marketplace",
+		content: (
+			<div>
+				<p>
+					I architected and implemented 49GIG, a high-trust freelance
+					marketplace where clients pre-fund projects and are matched with fully
+					vetted freelancers. Built with <b>Next.js (App Router)</b>,{" "}
+					<b>TypeScript</b>, <b>Tailwind CSS</b>, <b>shadcn/ui</b>,{" "}
+					<b>Convex</b>, and <b>Zustand</b>, the platform uses a{" "}
+					<b>zero-trust, server-side authorization model</b> and real-time
+					capabilities to keep all sensitive operations protected. Role-based
+					dashboards give clients, freelancers, and admins tailored views of
+					projects, payments, and verification status.
+				</p>
+				<p>
+					I led the end-to-end architecture, from a 14-phase system design and a
+					Convex data model (10+ core tables) to an 8+ domain Zustand store
+					blueprint and a security model covering <b>RBAC</b>,{" "}
+					<b>rate limiting</b>, and <b>CSRF</b>. A multi-layer freelancer
+					verification pipeline enforces English proficiency, and skills
+					assessments with weighted scoring and anti-fraud checks (IP/device/
+					session analysis), blocking access until verification is complete.
+					Payments are powered by <b>Flutterwave</b> with milestone-based escrow and
+					webhooks, combined with real-time chat, dispute workflows, and
+					comprehensive audit logging for all sensitive actions.
+				</p>
+			</div>
+		),
+	},
+	{
+		href: "https://affiliates.tubira.ai",
+		title: "Tubira Affiliate Platform",
+		description:
+			"Affiliate platform for Tubira, a unified vacation and travel marketplace for flights, hotels, activities, and more in one checkout.",
+		thumbnail: tb1,
+		images: [tb1, tb2, tb3, tb4],
+		stack: ["Nextjs", "Tailwindcss", "Typescript"],
+		slug: "tubira-affiliate-platform",
+		content: (
+			<div>
+				<p>
+					I built the affiliate platform for <b>Tubira</b>, a global travel
+					marketplace that unifies flights, hotels, resorts, activities, cars,
+					cruises, and eSIM plans into a single booking experience (
+					<a href="https://affiliates.tubira.ai" target="_blank" rel="noreferrer">
+						https://affiliates.tubira.ai
+					</a>
+					). The platform enables affiliates to promote multiple travel products
+					in one place, helping travelers book entire trips end-to-end while
+					maintaining a smooth, secure checkout flow.
+				</p>
+				<p>
+					On the partner side, I focused on building a clear, analytics-driven
+					experience for affiliates to track referrals, commissions, and
+					payouts. The system supports multi-product attach, high-value
+					bookings, and multi-currency flows, with transparent, ethical
+					monetization at its core. Affiliates benefit from configurable
+					tracking windows, support for co-branded landing pages, and reliable
+					commission adjustments when bookings are refunded, aligning with
+					Tubira&apos;s goal of a trusted, long-term partner network.
+				</p>
+			</div>
+		),
+	},
+	{
+		href: "https://nyscakuresouthlg.com.ng",
+		title: "NYSC CDS Attendance & Documentation System",
+		description:
+			"A QR-based attendance and documentation platform for NYSC CDS groups in Akure South LGA, replacing manual roll calls with real-time dashboards and reports.",
+		thumbnail: nysc1,
+		images: [nysc1, nysc2, nysc3, nysc4, nysc5, nysc6],
+		stack: ["Nextjs", "Tailwindcss", "Typescript"],
+		slug: "nysc-cds-attendance-system",
+		content: (
+			<div>
+				<p>
+					I designed and developed the <b>CDS Attendance System</b> for NYSC
+					Akure South LGA, a web platform that modernizes attendance management
+					for CDS groups by replacing paper roll calls with QR-based check-ins,{" "}
+					<b>real-time dashboards</b>, and rich analytics (
+					<a
+						href="https://nyscakuresouthlg.com.ng"
+						target="_blank"
+						rel="noreferrer"
+					>
+						https://nyscakuresouthlg.com.ng
+					</a>
+					). Each member has a digital identity tied to a specific CDS group and
+					role (member, leader, super admin), ensuring that all attendance data
+					is consistently scoped and auditable.
+				</p>
+				<p>
+					For every CDS meeting, the system generates a secure QR token that
+					members scan to check in for that date and session, enforcing{" "}
+					<b>one valid attendance per user per meeting/day</b>. Admins can still
+					apply manual overrides for legitimate cases (technical issues, late
+					arrivals) while the platform keeps strict rules around dates,
+					uniqueness, and group membership. Dashboards surface live attendance
+					status, trends over time, performance by group and role, and
+					&quot;top groups&quot; by participation, while monthly and
+					date-bounded reports give leadership fast insight without dealing with
+					raw spreadsheets. This balances automation with human control, giving
+					NYSC leadership a centralized, scalable, and trustworthy record of
+					participation across dozens of groups and thousands of entries.
+				</p>
+			</div>
+		),
+	},
 	{
 		href: "https://pesta-ticketr.vercel.app",
 		title: "Tickethub-Event Ticketing Platform",
