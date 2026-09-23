@@ -1,5 +1,6 @@
 "use client";
 import { Paragraph } from "@/components/Paragraph";
+import { Reveal } from "@/components/Reveal";
 import Image from "next/image";
 
 import { motion } from "framer-motion";
@@ -39,7 +40,7 @@ export default function About() {
 				))}
 			</div>
 
-			<div className="max-w-4xl">
+			<Reveal className="max-w-4xl">
 				<Paragraph className=" mt-4">
 					Hey there, I’m Franklin Olisaemeka Enunwa — a dedicated Next.js
 					developer with a B.Sc. in Computer and Robotics Education. I’m
@@ -100,7 +101,7 @@ export default function About() {
 					great software—I’m glad you&apos;re here. Let&apos;s connect and build
 					something meaningful together.
 				</Paragraph>
-			</div>
+			</Reveal>
 		</div>
 	);
 }

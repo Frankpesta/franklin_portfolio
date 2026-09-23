@@ -1,19 +1,18 @@
 "use client";
 
-import React, { useEffect, Children, useState, useRef } from "react";
+import React, { Children, useState, useRef, useSyncExternalStore } from "react";
 
 // import "prism-theme-night-owl";
 import clsx from "clsx";
 
-export const CodeWindow = ({ title, children }: any) => {
-  const [isClient, setIsClient] = useState(false);
+const emptySubscribe = () => () => {};
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  useEffect(() => {
-    // Prism.highlightAll();
-  }, []);
+export const CodeWindow = ({ title, children }: any) => {
+  const isClient = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
   let child = Children.only(children);
 

@@ -1,33 +1,54 @@
-import React from "react";
-import cabwire from "public/images/cabwire.png";
-import linkedcart from "public/images/linkedcart.png";
-import benjalabs from "public/images/benjalabs.png";
-import ohhfoundation from "public/images/ohhfoundation.png";
-import dishriders from "public/images/dish-riders.png";
-import cresa from "public/images/cresa.png";
-import dishrest from "public/images/dish-rest.png";
-import pfhixtech from "public/images/pfhixtech.png";
-import hub from "public/images/hub.png";
-import hub2 from "public/images/hub2.png";
-import hub3 from "public/images/hub3.png";
-import gig1 from "public/images/49g1.png";
-import gig2 from "public/images/49g2.png";
-import gig3 from "public/images/49g3.png";
-import gig4 from "public/images/49g4.png";
-import gig5 from "public/images/49g5.png";
-import gig6 from "public/images/49g6.png";
-import tb1 from "public/images/tb1.png";
-import tb2 from "public/images/tb2.png";
-import tb3 from "public/images/tb3.png";
-import tb4 from "public/images/tb4.png";
-import nysc1 from "public/images/nysc1.png";
-import nysc2 from "public/images/nysc2.png";
-import nysc3 from "public/images/nysc3.png";
-import nysc4 from "public/images/nysc4.png";
-import nysc5 from "public/images/nysc5.png";
-import nysc6 from "public/images/nysc6.png";
+const cabwire = "/images/cabwire.png";
+const linkedcart = "/images/linkedcart.png";
+const benjalabs = "/images/benjalabs.png";
+const ohhfoundation = "/images/ohhfoundation.png";
+const dishriders = "/images/dish-riders.png";
+const cresa = "/images/cresa.png";
+const dishrest = "/images/dish-rest.png";
+const pfhixtech = "/images/pfhixtech.png";
+const hub = "/images/hub.png";
+const hub2 = "/images/hub2.png";
+const hub3 = "/images/hub3.png";
+const gig1 = "/images/49g1.png";
+const gig2 = "/images/49g2.png";
+const gig3 = "/images/49g3.png";
+const gig4 = "/images/49g4.png";
+const gig5 = "/images/49g5.png";
+const gig6 = "/images/49g6.png";
+const tb1 = "/images/tb1.png";
+const tb2 = "/images/tb2.png";
+const tb3 = "/images/tb3.png";
+const tb4 = "/images/tb4.png";
+const nysc1 = "/images/nysc1.png";
+const nysc2 = "/images/nysc2.png";
+const nysc3 = "/images/nysc3.png";
+const nysc4 = "/images/nysc4.png";
+const nysc5 = "/images/nysc5.png";
+const nysc6 = "/images/nysc6.png";
+const saverlly = "/images/saverlly-placeholder.svg";
 
 export const products = [
+	{
+		// TODO: replace with real Saverlly details (live link, description, stack, screenshots)
+		href: "#",
+		title: "Saverlly",
+		description:
+			"A savings and personal finance app that helps users build consistent saving habits and reach their financial goals faster.",
+		thumbnail: saverlly,
+		images: [saverlly],
+		stack: ["Nextjs", "Tailwindcss", "Typescript"],
+		slug: "saverlly",
+		content: (
+			<div>
+				{/* TODO: replace with real Saverlly details */}
+				<p>
+					Saverlly is a savings and personal finance product I&apos;ve been
+					building. Full case study, screenshots, and live link coming soon —
+					check back shortly for the complete write-up.
+				</p>
+			</div>
+		),
+	},
 	{
 		href: "https://49gig.com",
 		title: "49GIG — Curated Freelance Marketplace",

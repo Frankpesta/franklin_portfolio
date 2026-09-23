@@ -1,9 +1,38 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 import { Heading } from "./Heading";
 import { twMerge } from "tailwind-merge";
+import { useGSAP } from "@gsap/react";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 export const TechStack = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!containerRef.current || prefersReducedMotion()) return;
+
+      gsap.fromTo(
+        ".tech-logo",
+        { opacity: 0, y: 24, scale: 0.9 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 88%",
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   const stack = [
     {
       title: "Next.js",
@@ -49,7 +78,7 @@ export const TechStack = () => {
     },
   ];
   return (
-    <div>
+    <div ref={containerRef}>
       <Heading
         as="h2"
         className="font-black text-lg md:text-lg lg:text-lg mt-20 mb-4"
@@ -64,7 +93,10 @@ export const TechStack = () => {
             width={`200`}
             height={`200`}
             alt={item.title}
-            className={twMerge("object-contain mr-4 mb-4", item.className)}
+            className={twMerge(
+              "tech-logo object-contain mr-4 mb-4",
+              item.className
+            )}
           />
         ))}
       </div>
