@@ -36,7 +36,7 @@ export function Experience() {
 					.from(role.querySelectorAll(".exp-reveal"), { opacity: 0.35, duration: DUR.sm }, 0);
 			});
 		},
-		{ scope: rootRef },
+		{ scope: rootRef, defer: true },
 	);
 
 	return (

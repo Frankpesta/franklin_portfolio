@@ -72,6 +72,8 @@ export type MotionConditions = Record<keyof typeof MOTION_CONDITIONS, boolean>;
 export const INTRO = {
 	storageKey: "fo-intro-seen",
 	exitEvent: "fo:intro-exit",
+	/** Hard ceiling; matches the `intro-failsafe` animation delay in globals.css. */
+	failsafeMs: 5000,
 	/** Counter run time; the whole intro stays under 2.5s. */
 	countDuration: 1.25,
 } as const;

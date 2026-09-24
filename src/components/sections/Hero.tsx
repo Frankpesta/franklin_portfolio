@@ -21,7 +21,7 @@ export function Hero() {
 	const progress = useRef(0);
 
 	useMotion(
-		({ desktop, mobile, reduce }) => {
+		({ reduce }) => {
 			if (reduce) return;
 			let cleanup: (() => void) | undefined;
 
@@ -29,25 +29,47 @@ export function Hero() {
 			// page, hide the name and raise it as the sheet splits open. On every
 			// other visit the name is simply there at first paint (good for LCP).
 			if (document.documentElement.dataset.intro === "play") {
-				const split = SplitText.create(".hero-line", { type: "chars", mask: "chars" });
+				// The h1 carries the aria-label and its lines are aria-hidden already.
+				const split = SplitText.create(".hero-line", { type: "chars", mask: "chars", aria: "none" });
 				gsap.set(split.chars, { yPercent: 115 });
-				gsap.set(".hero-rise", { opacity: 0, y: 24 });
+				// Transform only, never opacity: the paragraph stays "painted" under
+				// the intro so it counts for LCP at first paint, not after the intro.
+				gsap.set(".hero-rise", { y: 32 });
+				let played = false;
 				const play = () => {
+					if (played) return;
+					played = true;
+					window.clearTimeout(fallback);
 					gsap
 						.timeline()
 						.to(split.chars, { yPercent: 0, duration: DUR.lg, stagger: STAGGER.chars, ease: EASE.out })
-						.to(".hero-rise", { opacity: 1, y: 0, duration: DUR.md, stagger: STAGGER.items }, "-=0.7")
+						.to(".hero-rise", { y: 0, duration: DUR.lg, stagger: STAGGER.items }, "-=0.9")
 						.call(() => split.revert());
 				};
+				// Never let the name depend on the intro finishing: same ceiling as the
+				// CSS failsafe that hides the intro overlay.
+				const fallback = window.setTimeout(play, INTRO.failsafeMs);
 				window.addEventListener(INTRO.exitEvent, play, { once: true });
-				cleanup = () => window.removeEventListener(INTRO.exitEvent, play);
+				cleanup = () => {
+					window.clearTimeout(fallback);
+					window.removeEventListener(INTRO.exitEvent, play);
+				};
 			}
 
 			// Blueprint furniture draws in on every visit.
 			gsap.from(".hero-draw-x", { scaleX: 0, duration: DUR.xl, ease: EASE.inOut, stagger: 0.1 });
 			gsap.from(".hero-draw-y", { scaleY: 0, duration: DUR.xl, ease: EASE.inOut });
 
-			// Scrubbed exit: the name pulls apart, the grid and core drift at their own depth.
+			return cleanup;
+		},
+		{ scope: rootRef },
+	);
+
+	// Scrubbed exit: the name pulls apart, the grid and core drift at their own
+	// depth. Nobody scrolls in the first moments, so this is set up when idle.
+	useMotion(
+		({ desktop, mobile, reduce }) => {
+			if (reduce) return;
 			const drift = desktop ? 1 : 0.45;
 			gsap
 				.timeline({
@@ -67,10 +89,8 @@ export function Hero() {
 				.to(".hero-grid", { yPercent: 18 }, 0)
 				.to(".hero-visual", { yPercent: desktop ? 28 : 12, opacity: mobile ? 0.2 : 0.6 }, 0)
 				.to(".hero-meta", { opacity: 0, y: -30 }, 0);
-
-			return cleanup;
 		},
-		{ scope: rootRef },
+		{ scope: rootRef, defer: true },
 	);
 
 	return (
@@ -93,8 +113,10 @@ export function Hero() {
 				className="hero-visual pointer-events-none absolute right-[-18vw] top-[14vh] -z-10 aspect-square w-[78vw] opacity-50 sm:right-[-6vw] sm:w-[52vw] lg:right-[3vw] lg:top-[12vh] lg:w-[38vw] lg:opacity-100"
 			/>
 
-			<div className="mt-auto pt-[14vh]">
-				<h1 id="hero-title" aria-label={site.name} className="t-display [font-stretch:105%]">
+			{/* Top-anchored on phones: a bottom-anchored block moves as a whole whenever
+			    anything inside it changes height (e.g. a font swap), which read as CLS. */}
+			<div className="pt-[18vh] lg:mt-auto lg:pt-[14vh]">
+				<h1 id="hero-title" aria-label={site.name} className="t-display">
 					<span aria-hidden className="hero-line hero-line-1 block">
 						Franklin
 					</span>

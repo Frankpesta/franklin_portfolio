@@ -30,7 +30,7 @@ export function WorkIndex() {
 				scrollTrigger: { trigger: ".index-list", start: "top 85%", ...PLAY_ONCE },
 			});
 		},
-		{ scope: rootRef },
+		{ scope: rootRef, defer: true },
 	);
 
 	// Cursor-trailing preview.

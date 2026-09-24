@@ -10,10 +10,13 @@ export function Rule({
 	className,
 	vertical = false,
 	delay = 0,
+	defer = true,
 }: {
 	className?: string;
 	vertical?: boolean;
 	delay?: number;
+	/** Set false for rules visible at load, so they don't flash before drawing. */
+	defer?: boolean;
 }) {
 	const ref = useRef<HTMLSpanElement>(null);
 
@@ -28,7 +31,7 @@ export function Rule({
 				scrollTrigger: { trigger: ref.current, start: "top 92%", ...PLAY_ONCE },
 			});
 		},
-		{ scope: ref },
+		{ scope: ref, defer },
 	);
 
 	return (

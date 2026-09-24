@@ -38,10 +38,10 @@ export function Approach() {
 		({ reduce, mobile }) => {
 			if (reduce) return;
 			// The statement is "read in": each word darkens as the scroll passes it.
-			const split = SplitText.create(".approach-statement", { type: "words" });
+			const split = SplitText.create(".approach-statement", { type: "words", aria: "none" });
 			gsap.fromTo(
 				split.words,
-				{ opacity: 0.14 },
+				{ opacity: 0.2 },
 				{
 					opacity: 1,
 					stagger: STAGGER.words,
@@ -62,7 +62,7 @@ export function Approach() {
 			});
 			return () => split.revert();
 		},
-		{ scope: rootRef },
+		{ scope: rootRef, defer: true },
 	);
 
 	return (

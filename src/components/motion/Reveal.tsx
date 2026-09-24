@@ -44,7 +44,7 @@ export function Reveal({ children, className, variant = "rise", delay = 0, start
 
 			gsap.from(el, { opacity: 0, y: mobile ? 24 : 48, duration: DUR.lg, delay, scrollTrigger });
 		},
-		{ scope: ref },
+		{ scope: ref, defer: true },
 	);
 
 	if (variant === "curtain") {

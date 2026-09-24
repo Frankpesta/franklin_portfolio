@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { site } from "@/content/site";
 import { DUR, EASE, STAGGER } from "@/motion/config";
 import { gsap, ScrollTrigger, useGSAP } from "@/motion/gsap";
+import { useMotion } from "@/motion/hooks";
 import { useScroll } from "@/motion/SmoothScroll";
 import { ThemeToggle } from "./ThemeToggle";
 import { TransitionLink } from "./TransitionLink";
@@ -22,7 +23,7 @@ export function Header() {
 	const { lock, unlock } = useScroll();
 
 	// Slide away while reading down, return on any upward scroll.
-	useGSAP(
+	useMotion(
 		() => {
 			const header = headerRef.current;
 			if (!header) return;
@@ -33,7 +34,7 @@ export function Header() {
 				onUpdate: (self) => show(self.direction === 1 && self.scroll() > 160 ? -110 : 0),
 			});
 		},
-		{ scope: headerRef },
+		{ scope: headerRef, defer: true },
 	);
 
 	useGSAP(
@@ -87,9 +88,10 @@ export function Header() {
 				className="fixed inset-x-0 top-0 z-[80] border-b border-line bg-paper/85 backdrop-blur-md"
 			>
 				<div className="flex h-[var(--header-h)] items-center justify-between gap-6 px-[var(--gutter)]">
-					<TransitionLink href="/" className="group flex items-baseline gap-3" aria-label={`${site.name}, home`}>
+					<TransitionLink href="/" className="group flex items-baseline gap-3 py-2">
 						<span className="text-lg font-extrabold uppercase tracking-tight">
 							Franklin<span className="text-accent">.</span>
+							<span className="sr-only"> Olisaemeka, home</span>
 						</span>
 						<span className="t-label hidden text-muted xl:inline">{site.role}</span>
 					</TransitionLink>
@@ -100,7 +102,7 @@ export function Header() {
 								<li key={item.href}>
 									<TransitionLink
 										href={item.href}
-										className="t-label relative py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-right after:scale-x-0 after:bg-accent after:transition-transform after:duration-500 hover:after:origin-left hover:after:scale-x-100"
+										className="t-label relative inline-block py-3 after:absolute after:inset-x-0 after:bottom-2 after:h-px after:origin-right after:scale-x-0 after:bg-accent after:transition-transform after:duration-500 hover:after:origin-left hover:after:scale-x-100"
 									>
 										{item.label}
 									</TransitionLink>
@@ -118,13 +120,13 @@ export function Header() {
 							{site.availability}
 						</p>
 						<ThemeToggle className="hidden items-center gap-2 sm:flex" />
-						<a href={site.resume} className="t-label hidden lg:inline" target="_blank" rel="noreferrer">
+						<a href={site.resume} className="t-label hidden py-3 lg:inline" target="_blank" rel="noreferrer">
 							Résumé ↗
 						</a>
 						<button
 							ref={toggleRef}
 							type="button"
-							className="t-label lg:hidden"
+							className="t-label -my-2 py-4 lg:hidden"
 							aria-expanded={open}
 							aria-controls="mobile-menu"
 							onClick={() => setOpen((o) => !o)}

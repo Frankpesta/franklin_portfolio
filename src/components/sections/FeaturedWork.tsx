@@ -163,7 +163,7 @@ export function FeaturedWork() {
 				});
 			}
 		},
-		{ scope: rootRef },
+		{ scope: rootRef, defer: true },
 	);
 
 	return (

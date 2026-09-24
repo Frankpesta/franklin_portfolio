@@ -9,17 +9,20 @@ import { PageTransition } from "@/motion/PageTransition";
 import { SmoothScroll } from "@/motion/SmoothScroll";
 import "./globals.css";
 
+// Default width only: the wdth axis nearly doubled the file and no fallback can
+// mimic stretched metrics, so the swap re-wrapped the hero (CLS + late LCP).
 const archivo = Archivo({
 	subsets: ["latin"],
-	axes: ["wdth"],
 	variable: "--font-archivo",
 	display: "swap",
 });
 
+// Labels only; not worth competing with the display face for early bandwidth.
 const jetbrains = JetBrains_Mono({
 	subsets: ["latin"],
 	variable: "--font-jetbrains",
 	display: "swap",
+	preload: false,
 });
 
 export const metadata: Metadata = {

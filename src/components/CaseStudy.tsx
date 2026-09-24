@@ -48,7 +48,7 @@ export function CaseStudy({ project }: { project: Project }) {
 							Sheet {sheetNumber(project.slug)} / {total} — {project.tier === "in-progress" ? "In progress" : "Case study"}
 						</span>
 					</div>
-					<Rule className="mt-3" />
+					<Rule className="mt-3" defer={false} />
 
 					<p className="t-label mt-12 text-accent-text">{project.category}</p>
 					<SplitReveal as="h1" id="cs-title" trigger="mount" type="chars" className="t-h1 mt-4 max-w-[16ch]">

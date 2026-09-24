@@ -161,6 +161,9 @@
 --------------------------------------------------------------------------- */
 @layer base {
 	html {
+		/* Locking scroll (intro, dialogs) must not change the page width, or every
+		   ScrollTrigger and SplitText would re-measure at once. */
+		scrollbar-gutter: stable;
 		background: var(--paper);
 		color: var(--ink);
 		-webkit-text-size-adjust: 100%;

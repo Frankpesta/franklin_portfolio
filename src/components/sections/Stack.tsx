@@ -53,7 +53,7 @@ export function Stack() {
 				},
 			});
 		},
-		{ scope: rootRef },
+		{ scope: rootRef, defer: true },
 	);
 
 	return (

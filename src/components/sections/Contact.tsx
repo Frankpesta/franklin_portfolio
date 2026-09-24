@@ -25,7 +25,7 @@ export function Contact() {
 					<SectionLabel index="07" title="Contact" aside={site.availability} />
 
 					{/* COPY: review */}
-					<SplitReveal as="h2" id="contact-title" type="chars" className="t-display mt-12 max-w-[12ch] [font-stretch:100%]">
+					<SplitReveal as="h2" id="contact-title" type="chars" className="t-display mt-12 max-w-[12ch]">
 						Let&apos;s build something that works<span className="text-accent">.</span>
 					</SplitReveal>
 

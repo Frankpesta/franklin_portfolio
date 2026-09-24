@@ -45,7 +45,7 @@ export function About() {
 				scrollTrigger: { trigger: ".about-frame", start: "top 85%", ...PLAY_ONCE },
 			});
 		},
-		{ scope: rootRef },
+		{ scope: rootRef, defer: true },
 	);
 
 	return (
@@ -56,7 +56,7 @@ export function About() {
 					<div className="about-frame relative aspect-[4/5] overflow-hidden bg-paper-2">
 						<Image
 							src={portrait}
-							alt="Portrait of Franklin Olisaemeka in a black T-shirt, photographed outdoors in black and white"
+							alt="Portrait of Franklin Olisaemeka smiling, in a white T-shirt against a grey studio backdrop"
 							sizes="(min-width: 1024px) 38vw, 100vw"
 							placeholder="blur"
 							className="about-photo h-full w-full object-cover object-[50%_30%] grayscale"

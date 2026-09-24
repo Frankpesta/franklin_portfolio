@@ -37,16 +37,12 @@ export function ThemeToggle({ className }: { className?: string }) {
 	};
 
 	return (
-		<button
-			type="button"
-			onClick={toggle}
-			aria-label={`Switch to ${next} theme`}
-			className={className}
-		>
+		<button type="button" onClick={toggle} className={className}>
 			<span aria-hidden className="relative inline-flex h-3.5 w-3.5 items-center justify-center rounded-full border border-current">
 				<span className="absolute inset-y-0 right-0 w-1/2 rounded-r-full bg-current" />
 			</span>
 			<span className="t-label">{theme ? (theme === "dark" ? "Dark" : "Light") : "Theme"}</span>
+			<span className="sr-only"> theme, switch to {next}</span>
 		</button>
 	);
 }

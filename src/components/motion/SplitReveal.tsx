@@ -50,24 +50,52 @@ export function SplitReveal({
 			}
 
 			const unit: SplitKind = mobile && type === "chars" ? "words" : type;
-			const split = SplitText.create(el, {
-				type: unit === "lines" ? "lines" : `lines,${unit}`,
-				mask: "lines",
-				linesClass: "split-line",
-				autoSplit: true,
-				onSplit: (self) =>
-					gsap.from(self[unit], {
-						yPercent: 115,
-						duration: DUR.lg,
-						stagger: STAGGER[unit],
-						ease: EASE.out,
-						delay,
-						scrollTrigger,
-					}),
-			});
-			return () => split.revert();
+			let split: SplitText | undefined;
+			// SplitText returns the onSplit animation to itself, so reverting the
+			// split also kills the tween and its ScrollTrigger.
+			const build = () => {
+				split ??= SplitText.create(el, {
+					type: unit === "lines" ? "lines" : `lines,${unit}`,
+					mask: "lines",
+					linesClass: "split-line",
+					autoSplit: true,
+					// Lines and words still read naturally; only character splits need
+					// an aria-label (and only headings may carry one, which is where we use chars).
+					aria: unit === "chars" ? "auto" : "none",
+					onSplit: (self) =>
+						gsap.from(self[unit], {
+							yPercent: 115,
+							duration: DUR.lg,
+							stagger: STAGGER[unit],
+							ease: EASE.out,
+							delay,
+							scrollTrigger,
+						}),
+				});
+			};
+
+			if (trigger === "mount") {
+				build();
+				return () => split?.revert();
+			}
+
+			// Split lazily, half a screen before the text arrives: splitting every
+			// heading at hydration was a large share of mobile main-thread time.
+			const io = new IntersectionObserver(
+				([entry]) => {
+					if (!entry.isIntersecting) return;
+					io.disconnect();
+					build();
+				},
+				{ rootMargin: "0px 0px 50% 0px" },
+			);
+			io.observe(el);
+			return () => {
+				io.disconnect();
+				split?.revert();
+			};
 		},
-		{ scope: ref },
+		{ scope: ref, defer: trigger === "scroll" },
 	);
 
 	const Tag = as;

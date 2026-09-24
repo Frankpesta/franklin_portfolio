@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { createContext, type ReactNode, useCallback, useContext, useRef, useState } from "react";
 import { DUR, EASE } from "./config";
-import { Flip, gsap, ScrollTrigger } from "./gsap";
+import { gsap, loadFlip, ScrollTrigger } from "./gsap";
 import { useReducedMotion } from "./hooks";
 import { useScroll } from "./SmoothScroll";
 
@@ -67,6 +67,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
 
 			busy.current = true;
 			lock();
+			const flipPlugin = flip ? loadFlip() : null;
 			const oldMain = visibleMain();
 			const panel = panelRef.current;
 
@@ -110,7 +111,8 @@ export function PageTransition({ children }: { children: ReactNode }) {
 			const target = newMain?.querySelector<HTMLElement>(`[data-flip-target="${flip.slug}"]`);
 			const ghostEl = ghostRef.current;
 			if (newMain) gsap.from(newMain, { opacity: 0, duration: DUR.md, ease: EASE.out, delay: DUR.sm, clearProps: "opacity" });
-			if (target && ghostEl) {
+			const Flip = await flipPlugin;
+			if (target && ghostEl && Flip) {
 				gsap.set(target, { opacity: 0 });
 				await Flip.fit(ghostEl, target, { scale: true, duration: DUR.lg, ease: EASE.inOut });
 				gsap.set(target, { clearProps: "opacity" });
