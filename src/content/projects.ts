@@ -28,6 +28,10 @@ import ohhfoundation from "../../public/images/ohhfoundation.png";
 import pfhixtech from "../../public/images/pfhixtech.png";
 import cresa from "../../public/images/cresa.png";
 import saverlly from "../../public/images/saverlly-placeholder.svg";
+import hbs1 from "../../public/images/hbs1.png";
+import hbs2 from "../../public/images/hbs2.png";
+import hbs3 from "../../public/images/hbs3.png";
+import hbs4 from "../../public/images/hbs4.png";
 
 // COPY: review — every tagline, summary, highlight and body line below was
 // rewritten from the old long-form project descriptions.
@@ -203,6 +207,32 @@ export const projects: readonly Project[] = [
 		gallery: [
 			{ src: dishRiders, alt: "Dishpatch rider web app" },
 			{ src: dishRest, alt: "Dishpatch restaurant web app" },
+		],
+	},
+	{
+		// TODO: confirm your role, the year, and the payment/auth stack for this build.
+		slug: "helens-beauty-secret",
+		title: "Helen's Beauty Secret",
+		tier: "selected",
+		category: "E-commerce · beauty",
+		role: "Full-stack developer",
+		tagline:
+			"A storefront for a certified-organic skincare brand: shop, product pages, cart, accounts and a journal.",
+		summary:
+			"Helen's Beauty Secret sells professional, certified-organic skincare. The site has to feel as considered as the formulas, so it pairs an editorial dark-and-gold look with a full shopping flow: collection, detailed product pages, bag, customer accounts and a skincare journal.",
+		highlights: [
+			"Product pages built for scrutiny: full ingredient lists, usage guidance and reviews alongside the buy button.",
+			"A complete commerce flow (collection, bag, accounts) on Next.js with a Convex backend.",
+			"Editorial content (standards, philosophy, regimen guide, FAQ, journal) that sells the brand's rigour, not just its products.",
+		],
+		stack: ["Next.js", "TypeScript", "Convex", "Tailwind CSS"],
+		links: [{ label: "helensbeautysecret.com", href: "https://www.helensbeautysecret.com" }],
+		cover: { src: hbs1, alt: "Helen's Beauty Secret home page: Radiance you can measure in the mirror" },
+		gallery: [
+			{ src: hbs1, alt: "Helen's Beauty Secret home page hero" },
+			{ src: hbs2, alt: "Helen's Beauty Secret shop page" },
+			{ src: hbs3, alt: "Stem Cell Age Reverse Serum product page" },
+			{ src: hbs4, alt: "Helen's Beauty Secret about page" },
 		],
 	},
 	{
