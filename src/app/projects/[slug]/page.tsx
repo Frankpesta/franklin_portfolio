@@ -1,46 +1,57 @@
-import { Container } from "@/components/Container";
-import { Heading } from "@/components/Heading";
-import { Highlight } from "@/components/Highlight";
-import { Paragraph } from "@/components/Paragraph";
-import { SingleProduct } from "@/components/Product";
-import { Products } from "@/components/Products";
-import { products } from "@/constants/products";
-import { Product } from "@/types/products";
-import { Metadata } from "next";
-import Image from "next/image";
-import { redirect } from "next/navigation";
+import type { Metadata } from "next";
+import { notFound, permanentRedirect } from "next/navigation";
+import { CaseStudy } from "@/components/CaseStudy";
+import { getProject, projects } from "@/content/projects";
+import { site } from "@/content/site";
 
-type Props = {
-  params: Promise<{ slug: string }>;
-};
+type Props = { params: Promise<{ slug: string }> };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const product = products.find((p) => p.slug === slug) as Product | undefined;
-  if (product) {
-    return {
-      title: product.title,
-      description: product.description,
-    };
-  } else {
-    return {
-      title: "Projects | John Doe",
-      description:
-        "John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.",
-    };
-  }
+export function generateStaticParams() {
+	return projects.map((p) => ({ slug: p.slug }));
 }
 
-export default async function SingleProjectPage({ params }: Props) {
-  const { slug } = await params;
-  const product = products.find((p) => p.slug === slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const { slug } = await params;
+	const project = getProject(slug);
+	if (!project) return {};
+	return {
+		title: project.title,
+		description: project.tagline,
+		alternates: { canonical: `/projects/${project.slug}` },
+		openGraph: {
+			type: "article",
+			title: `${project.title} · ${site.name}`,
+			description: project.tagline,
+			url: `/projects/${project.slug}`,
+		},
+	};
+}
 
-  if (!product) {
-    redirect("/projects");
-  }
-  return (
-    <Container>
-      <SingleProduct product={product} />
-    </Container>
-  );
+export default async function ProjectPage({ params }: Props) {
+	const { slug } = await params;
+	const project = getProject(slug);
+
+	if (!project) {
+		const merged = projects.find((p) => p.legacySlugs?.includes(slug));
+		if (merged) permanentRedirect(`/projects/${merged.slug}`);
+		notFound();
+	}
+
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "CreativeWork",
+		name: project.title,
+		description: project.summary,
+		url: `${site.url}/projects/${project.slug}`,
+		creator: { "@type": "Person", name: site.fullName, url: site.url },
+		keywords: project.stack.join(", "),
+		...(project.year ? { dateCreated: project.year.slice(0, 4) } : {}),
+	};
+
+	return (
+		<>
+			<CaseStudy key={project.slug} project={project} />
+			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+		</>
+	);
 }
