@@ -1,33 +1,27 @@
-import { Container } from "@/components/Container";
-import { Heading } from "@/components/Heading";
-import { Highlight } from "@/components/Highlight";
-import { Paragraph } from "@/components/Paragraph";
-import { Products } from "@/components/Products";
-import { TechStack } from "@/components/TechStack";
-import Image from "next/image";
+import { Intro } from "@/components/Intro";
+import { About } from "@/components/sections/About";
+import { Approach } from "@/components/sections/Approach";
+import { Contact } from "@/components/sections/Contact";
+import { Experience } from "@/components/sections/Experience";
+import { FeaturedWork } from "@/components/sections/FeaturedWork";
+import { Hero } from "@/components/sections/Hero";
+import { Stack } from "@/components/sections/Stack";
+import { WorkIndex } from "@/components/sections/WorkIndex";
 
 export default function Home() {
 	return (
-		<Container>
-			<span className="text-4xl">👋</span>
-			<Heading className="font-black">Hello there! I&apos;m Franklin</Heading>
-			<Paragraph className="max-w-xl mt-4">
-				I&apos;m a NextJs developer that loves{" "}
-				<Highlight>building products</Highlight> and web apps that can impact
-				millions of lives
-			</Paragraph>
-			<Paragraph className="max-w-xl mt-4">
-				I&apos;m a mid-level software engineer with{" "}
-				<Highlight>4 years of experience</Highlight> building scalable web apps
-				that are performance optimized and good looking.
-			</Paragraph>
-			<Heading
-				as="h2"
-				className="font-black text-lg md:text-lg lg:text-lg mt-20 mb-4">
-				What I&apos;ve been working on
-			</Heading>
-			<Products />
-			<TechStack />
-		</Container>
+		<>
+			<Intro />
+			<main id="main">
+				<Hero />
+				<Approach />
+				<FeaturedWork />
+				<WorkIndex />
+				<Experience />
+				<About />
+				<Stack />
+				<Contact />
+			</main>
+		</>
 	);
 }

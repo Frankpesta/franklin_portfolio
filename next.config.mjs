@@ -1,23 +1,20 @@
 /** @type {import('next').NextConfig} */
-import nextMDX from "@next/mdx";
-import remarkGfm from "remark-gfm";
-import rehypePrism from "@mapbox/rehype-prism";
-
 const nextConfig = {
-  images: {
-    domains: ["images.unsplash.com", "res.cloudinary.com"],
-  },
-  experimental: {
-    mdxRs: true,
-  },
+	agentRules: false,
+	images: {
+		formats: ["image/avif", "image/webp"],
+	},
+	async redirects() {
+		// Old routes from the previous site, folded into the one-page flow.
+		return [
+			{ source: "/about", destination: "/#about", permanent: true },
+			{ source: "/contact", destination: "/#contact", permanent: true },
+			{ source: "/resume", destination: "/#experience", permanent: true },
+			{ source: "/projects", destination: "/#index", permanent: true },
+			{ source: "/blog", destination: "/", permanent: true },
+			{ source: "/blog/:path*", destination: "/", permanent: true },
+		];
+	},
 };
 
-const withMDX = nextMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypePrism],
-  },
-});
-
-export default withMDX(nextConfig);
+export default nextConfig;
