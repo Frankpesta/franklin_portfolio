@@ -1,13 +1,9 @@
-"use client";
-import { useRef } from "react";
 import { SectionLabel } from "@/components/SectionLabel";
 import { SplitReveal } from "@/components/motion/SplitReveal";
 import { TransitionLink } from "@/components/TransitionLink";
 import { experience } from "@/content/experience";
 import { site } from "@/content/site";
-import { DUR, EASE } from "@/motion/config";
-import { gsap } from "@/motion/gsap";
-import { useMotion } from "@/motion/hooks";
+import { ExperienceSection } from "./motion";
 
 /**
  * A sticky summary on the left while the roles scroll past on the right.
@@ -15,43 +11,19 @@ import { useMotion } from "@/motion/hooks";
  * lights up as the fill reaches it.
  */
 export function Experience() {
-	const rootRef = useRef<HTMLElement>(null);
-
-	useMotion(
-		({ reduce }) => {
-			if (reduce) return;
-			gsap.fromTo(
-				".exp-progress",
-				{ scaleY: 0 },
-				{
-					scaleY: 1,
-					ease: EASE.scrub,
-					scrollTrigger: { trigger: ".exp-list", start: "top 60%", end: "bottom 60%", scrub: true },
-				},
-			);
-			gsap.utils.toArray<HTMLElement>(".exp-role").forEach((role) => {
-				gsap
-					.timeline({ scrollTrigger: { trigger: role, start: "top 60%", toggleActions: "play none none reverse" } })
-					.to(role.querySelector(".exp-marker"), { scale: 1, backgroundColor: "var(--accent)", duration: DUR.sm })
-					.from(role.querySelectorAll(".exp-reveal"), { opacity: 0.35, duration: DUR.sm }, 0);
-			});
-		},
-		{ scope: rootRef, defer: true },
-	);
-
 	return (
-		<section ref={rootRef} id="experience" aria-labelledby="experience-title" className="px-[var(--gutter)] py-[clamp(6rem,12vw,10rem)]">
+		<ExperienceSection id="experience" aria-labelledby="experience-title" className="px-[var(--gutter)] py-[clamp(6rem,12vw,10rem)]">
 			<SectionLabel index="04" title="Experience" aside={`${experience.length} roles`} />
 
 			<div className="mt-10 grid gap-12 lg:grid-cols-12">
 				<div className="lg:col-span-4">
 					<div className="lg:sticky lg:top-[calc(var(--header-h)+2rem)]">
-						<SplitReveal as="h2" id="experience-title" className="t-h1">
+						<SplitReveal as="h2" id="experience-title" className="t-h2">
 							Experience
 						</SplitReveal>
 						<p className="mt-8 flex items-baseline gap-3">
 							<span className="text-[clamp(4rem,9vw,8rem)] font-extrabold leading-none tracking-tighter">
-								{String(site.yearsOfExperience).padStart(2, "0")}
+								{site.experience}
 							</span>
 							<span className="t-label text-muted">Years building for startups, agencies & organisations</span>
 						</p>
@@ -104,6 +76,6 @@ export function Experience() {
 					</ol>
 				</div>
 			</div>
-		</section>
+		</ExperienceSection>
 	);
 }

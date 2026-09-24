@@ -1,12 +1,8 @@
-"use client";
-import { useRef } from "react";
 import { Rule } from "@/components/motion/Rule";
 import { SectionLabel } from "@/components/SectionLabel";
 import { TransitionLink } from "@/components/TransitionLink";
 import { getProject } from "@/content/projects";
-import { PLAY_ONCE, SCRUB, STAGGER } from "@/motion/config";
-import { gsap, SplitText } from "@/motion/gsap";
-import { useMotion } from "@/motion/hooks";
+import { ApproachSection } from "./motion";
 
 // COPY: review
 const STATEMENT =
@@ -32,41 +28,8 @@ const CAPABILITIES = [
 ] as const;
 
 export function Approach() {
-	const rootRef = useRef<HTMLElement>(null);
-
-	useMotion(
-		({ reduce, mobile }) => {
-			if (reduce) return;
-			// The statement is "read in": each word darkens as the scroll passes it.
-			const split = SplitText.create(".approach-statement", { type: "words", aria: "none" });
-			gsap.fromTo(
-				split.words,
-				{ opacity: 0.2 },
-				{
-					opacity: 1,
-					stagger: STAGGER.words,
-					ease: "none",
-					scrollTrigger: {
-						trigger: ".approach-statement",
-						start: mobile ? "top 85%" : "top 75%",
-						end: mobile ? "bottom 55%" : "bottom 45%",
-						scrub: SCRUB.tight,
-					},
-				},
-			);
-			gsap.from(".capability", {
-				y: 40,
-				opacity: 0,
-				stagger: STAGGER.items * 2,
-				scrollTrigger: { trigger: ".capabilities", start: "top 85%", ...PLAY_ONCE },
-			});
-			return () => split.revert();
-		},
-		{ scope: rootRef, defer: true },
-	);
-
 	return (
-		<section ref={rootRef} id="approach" aria-labelledby="approach-title" className="px-[var(--gutter)] py-[clamp(6rem,14vw,12rem)]">
+		<ApproachSection id="approach" aria-labelledby="approach-title" className="px-[var(--gutter)] py-[clamp(6rem,14vw,12rem)]">
 			<SectionLabel index="01" title="Approach" />
 			<h2 id="approach-title" className="sr-only">
 				Approach
@@ -94,6 +57,6 @@ export function Approach() {
 					</li>
 				))}
 			</ol>
-		</section>
+		</ApproachSection>
 	);
 }

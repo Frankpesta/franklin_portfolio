@@ -1,55 +1,18 @@
-"use client";
 import Image from "next/image";
-import { useRef } from "react";
 import { SectionLabel } from "@/components/SectionLabel";
 import { SplitReveal } from "@/components/motion/SplitReveal";
-import { DUR, EASE, PLAY_ONCE, SCRUB } from "@/motion/config";
-import { gsap } from "@/motion/gsap";
-import { useMotion } from "@/motion/hooks";
 import portrait from "../../../public/pesta2.jpeg";
+import { AboutSection } from "./motion";
 
 // COPY: review — condensed from the old About page.
 const PARAGRAPHS = [
-	"I'm a full-stack engineer with a B.Sc. in Computer and Robotics Education from the University of Nigeria, Nsukka. For four years I've been building products where the hard parts are invisible: who is allowed to do what, where the money goes, and what happens when something changes in real time.",
+	"I'm a full-stack engineer with a B.Sc. in Computer and Robotics Education from the University of Nigeria, Nsukka. For more than four years I've been building products where the hard parts are invisible: who is allowed to do what, where the money goes, and what happens when something changes in real time.",
 	"I care about the details people feel, like speed, accessibility and clarity, and the ones they never see: clean data models, typed boundaries and systems that are easy to change. I'm based in Nigeria and work remotely with teams worldwide, on contracts or as part of the team.",
 ];
 
 export function About() {
-	const rootRef = useRef<HTMLElement>(null);
-
-	useMotion(
-		({ reduce, desktop }) => {
-			if (reduce) return;
-			// Depth: the photo drifts slower than the page, its frame faster.
-			gsap.fromTo(
-				".about-photo",
-				{ yPercent: -10, scale: 1.15 },
-				{
-					yPercent: 10,
-					scale: 1.15,
-					ease: EASE.scrub,
-					scrollTrigger: { trigger: ".about-frame", start: "top bottom", end: "bottom top", scrub: SCRUB.loose },
-				},
-			);
-			if (desktop) {
-				gsap.fromTo(
-					".about-frame",
-					{ y: 80 },
-					{ y: -80, ease: EASE.scrub, scrollTrigger: { trigger: rootRef.current, start: "top bottom", end: "bottom top", scrub: SCRUB.loose } },
-				);
-			}
-			gsap.from(".about-frame", {
-				yPercent: 8,
-				opacity: 0,
-				duration: DUR.lg,
-				scrollTrigger: { trigger: ".about-frame", start: "top 85%", ...PLAY_ONCE },
-			});
-		},
-		{ scope: rootRef, defer: true },
-	);
-
 	return (
-		<section ref={rootRef} id="about" aria-labelledby="about-title" className="px-[var(--gutter)] py-[clamp(6rem,12vw,10rem)]">
+		<AboutSection id="about" aria-labelledby="about-title" className="px-[var(--gutter)] py-[clamp(6rem,12vw,10rem)]">
 			<SectionLabel index="05" title="About" />
 			<div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
 				<figure className="lg:col-span-5">
@@ -79,6 +42,6 @@ export function About() {
 					))}
 				</div>
 			</div>
-		</section>
+		</AboutSection>
 	);
 }

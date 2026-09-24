@@ -1,5 +1,3 @@
-"use client";
-import { useRef } from "react";
 import { Gallery } from "@/components/Gallery";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Rule } from "@/components/motion/Rule";
@@ -8,33 +6,15 @@ import { ProjectImage } from "@/components/ProjectImage";
 import { TransitionLink } from "@/components/TransitionLink";
 import { nextProject, projects, sheetNumber } from "@/content/projects";
 import type { Project } from "@/content/types";
-import { DUR, PLAY_ONCE, STAGGER } from "@/motion/config";
-import { gsap } from "@/motion/gsap";
-import { useMotion } from "@/motion/hooks";
+import { CaseStudyMain } from "./caseStudyMotion";
 
 const total = String(projects.length).padStart(2, "0");
 
 export function CaseStudy({ project }: { project: Project }) {
-	const rootRef = useRef<HTMLElement>(null);
 	const next = nextProject(project.slug);
 
-	useMotion(
-		({ reduce }) => {
-			if (reduce) return;
-			gsap.from(".cs-meta > *", { opacity: 0, y: 20, stagger: STAGGER.items, duration: DUR.md, delay: 0.25 });
-			gsap.from(".cs-note", {
-				opacity: 0,
-				y: 30,
-				stagger: STAGGER.items,
-				duration: DUR.md,
-				scrollTrigger: { trigger: ".cs-notes", start: "top 85%", ...PLAY_ONCE },
-			});
-		},
-		{ scope: rootRef },
-	);
-
 	return (
-		<main id="main" ref={rootRef}>
+		<CaseStudyMain id="main">
 			<article aria-labelledby="cs-title">
 				<header className="px-[var(--gutter)] pt-[calc(var(--header-h)+2.5rem)]">
 					<div className="t-label flex items-center justify-between gap-4 text-muted">
@@ -100,6 +80,21 @@ export function CaseStudy({ project }: { project: Project }) {
 					</div>
 				</figure>
 
+				{project.metrics && project.metrics.length > 0 && (
+					<section aria-label="Key figures" className="cs-metrics px-[var(--gutter)] pt-[clamp(3rem,6vw,5rem)]">
+						<dl className="grid gap-8 border-t border-line-strong pt-6 sm:grid-cols-3">
+							{project.metrics.map((m) => (
+								<div key={m.label} className="cs-metric flex flex-col gap-3">
+									<dt className="t-label max-w-[28ch] normal-case tracking-normal text-muted">{m.label}</dt>
+									<dd className="order-first text-[clamp(3rem,7vw,6rem)] font-extrabold leading-none tracking-tighter">
+										{m.value}
+									</dd>
+								</div>
+							))}
+						</dl>
+					</section>
+				)}
+
 				<section aria-labelledby="cs-overview" className="grid gap-8 px-[var(--gutter)] py-[clamp(4rem,9vw,8rem)] lg:grid-cols-12">
 					<h2 id="cs-overview" className="t-label text-muted lg:col-span-3">
 						Overview
@@ -162,6 +157,6 @@ export function CaseStudy({ project }: { project: Project }) {
 					</Magnetic>
 				</div>
 			</nav>
-		</main>
+		</CaseStudyMain>
 	);
 }

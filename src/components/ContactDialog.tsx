@@ -1,6 +1,7 @@
 "use client";
 import emailjs from "@emailjs/browser";
-import { type FormEvent, useCallback, useEffect, useId, useImperativeHandle, useRef, useState, type Ref } from "react";
+import { type FormEvent, useCallback, useEffect, useId, useImperativeHandle, useRef, useState, useSyncExternalStore, type Ref } from "react";
+import { createPortal } from "react-dom";
 import { site } from "@/content/site";
 import { DUR, EASE, STAGGER } from "@/motion/config";
 import { gsap } from "@/motion/gsap";
@@ -26,6 +27,8 @@ function validate(f: Fields): Errors {
 
 export type ContactDialogHandle = { open: () => void };
 
+const noop = () => () => {};
+
 /**
  * The contact form, in a native <dialog> (focus trap, Esc and inert page for
  * free) that slides in from the right. Messages go through EmailJS.
@@ -38,6 +41,8 @@ export function ContactDialog({ ref }: { ref: Ref<ContactDialogHandle> }) {
 	const [status, setStatus] = useState<Status>("idle");
 	const { lock, unlock } = useScroll();
 	const id = useId();
+	// Portalled to <body> so it takes the page theme, not the inverted contact section's.
+	const mounted = useSyncExternalStore(noop, () => true, () => false);
 
 	const reduce = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -76,7 +81,7 @@ export function ContactDialog({ ref }: { ref: Ref<ContactDialogHandle> }) {
 		};
 		dialog.addEventListener("cancel", onCancel);
 		return () => dialog.removeEventListener("cancel", onCancel);
-	}, [close]);
+	}, [close, mounted]);
 
 	const update = <K extends keyof Fields>(key: K, value: Fields[K]) => {
 		setFields((f) => ({ ...f, [key]: value }));
@@ -123,7 +128,9 @@ export function ContactDialog({ ref }: { ref: Ref<ContactDialogHandle> }) {
 	const inputClass =
 		"mt-2 w-full border-b border-line-strong bg-transparent py-3 text-lg outline-none transition-colors placeholder:text-muted/70 focus:border-accent aria-[invalid=true]:border-accent";
 
-	return (
+	if (!mounted) return null;
+
+	return createPortal(
 		<dialog
 			ref={dialogRef}
 			aria-labelledby={`${id}-title`}
@@ -266,6 +273,7 @@ export function ContactDialog({ ref }: { ref: Ref<ContactDialogHandle> }) {
 					</div>
 				</form>
 			</div>
-		</dialog>
+		</dialog>,
+		document.body,
 	);
 }
