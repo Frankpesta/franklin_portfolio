@@ -8,7 +8,8 @@ export const site = {
 	givenName: "Franklin",
 	familyName: "Olisaemeka",
 	role: "Full-stack product engineer",
-	yearsOfExperience: 4,
+	/** Shown as-is on the site. */
+	experience: "04+",
 	location: "Nigeria",
 	timeZone: "Africa/Lagos",
 	timeZoneLabel: "WAT · UTC+1",
@@ -19,7 +20,7 @@ export const site = {
 		"Franklin Olisaemeka is a full-stack product engineer based in Nigeria who designs and ships products end to end: data models, auth, payments, real-time systems and the interfaces on top. He works remotely with teams worldwide.",
 	/** Put the PDF at public/resume.pdf. */
 	resume: "/resume.pdf",
-	url: process.env.NEXT_PUBLIC_SITE_URL ?? (vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000"),
+	url: process.env.NEXT_PUBLIC_SITE_URL ?? (vercelUrl ? `https://${vercelUrl}` : "https://pesta-portfolio.vercel.app"),
 	emailjs: {
 		serviceId: "service_z5k4y5e",
 		templateId: "template_l9mkmug",

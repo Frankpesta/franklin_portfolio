@@ -5,22 +5,12 @@ import { twMerge } from "tailwind-merge";
 import { DUR, MQ } from "@/motion/config";
 import { gsap } from "@/motion/gsap";
 import { useFinePointer, useMediaQuery, useReducedMotion } from "@/motion/hooks";
+import { isCapableDevice } from "@/motion/capability";
 import { CoreFallback } from "./CoreFallback";
 
 const SystemCore = dynamic(() => import("./SystemCore"), { ssr: false });
 
-type NavigatorWithHints = Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number };
-
 const noop = () => () => {};
-
-/** Hardware hints only exist in the browser; the server assumes "not capable". */
-function isCapable() {
-	const nav = navigator as NavigatorWithHints;
-	if (nav.connection?.saveData) return false;
-	if ((nav.hardwareConcurrency ?? 8) <= 4) return false;
-	if ((nav.deviceMemory ?? 8) <= 4) return false;
-	return true;
-}
 
 /**
  * The SVG core renders first (and stays for reduced motion, touch, small or
@@ -32,7 +22,8 @@ export function HeroVisual({ progress, className }: { progress: RefObject<number
 	const reduce = useReducedMotion();
 	const fine = useFinePointer();
 	const desktop = useMediaQuery(MQ.desktop);
-	const capable = useSyncExternalStore(noop, isCapable, () => false);
+	// Hardware hints only exist in the browser; the server assumes "not capable".
+	const capable = useSyncExternalStore(noop, isCapableDevice, () => false);
 	const [inView, setInView] = useState(false);
 	const [seen, setSeen] = useState(false);
 

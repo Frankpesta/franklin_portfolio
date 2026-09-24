@@ -1,37 +1,41 @@
 import type { Project, Tech } from "./types";
 
-import gig1 from "../../public/images/49g1.png";
-import gig2 from "../../public/images/49g2.png";
-import gig3 from "../../public/images/49g3.png";
-import gig4 from "../../public/images/49g4.png";
-import gig5 from "../../public/images/49g5.png";
-import gig6 from "../../public/images/49g6.png";
-import tb1 from "../../public/images/tb1.png";
-import tb2 from "../../public/images/tb2.png";
-import tb3 from "../../public/images/tb3.png";
-import tb4 from "../../public/images/tb4.png";
-import nysc1 from "../../public/images/nysc1.png";
-import nysc2 from "../../public/images/nysc2.png";
-import nysc3 from "../../public/images/nysc3.png";
-import nysc4 from "../../public/images/nysc4.png";
-import nysc5 from "../../public/images/nysc5.png";
-import nysc6 from "../../public/images/nysc6.png";
-import hub from "../../public/images/hub.png";
-import hub2 from "../../public/images/hub2.png";
-import hub3 from "../../public/images/hub3.png";
-import dishRiders from "../../public/images/dish-riders.png";
-import dishRest from "../../public/images/dish-rest.png";
-import cabwire from "../../public/images/cabwire.png";
-import linkedcart from "../../public/images/linkedcart.png";
-import benjalabs from "../../public/images/benjalabs.png";
-import ohhfoundation from "../../public/images/ohhfoundation.png";
-import pfhixtech from "../../public/images/pfhixtech.png";
-import cresa from "../../public/images/cresa.png";
+import gig1 from "../../public/images/49g1.webp";
+import gig2 from "../../public/images/49g2.webp";
+import gig3 from "../../public/images/49g3.webp";
+import gig4 from "../../public/images/49g4.webp";
+import gig5 from "../../public/images/49g5.webp";
+import gig6 from "../../public/images/49g6.webp";
+import tb1 from "../../public/images/tb1.webp";
+import tb2 from "../../public/images/tb2.webp";
+import tb3 from "../../public/images/tb3.webp";
+import tb4 from "../../public/images/tb4.webp";
+import nysc1 from "../../public/images/nysc1.webp";
+import nysc2 from "../../public/images/nysc2.webp";
+import nysc3 from "../../public/images/nysc3.webp";
+import nysc4 from "../../public/images/nysc4.webp";
+import nysc5 from "../../public/images/nysc5.webp";
+import nysc6 from "../../public/images/nysc6.webp";
+import hub from "../../public/images/hub.webp";
+import hub2 from "../../public/images/hub2.webp";
+import hub3 from "../../public/images/hub3.webp";
+import dishRiders from "../../public/images/dish-riders.webp";
+import dishRest from "../../public/images/dish-rest.webp";
+import cabwire from "../../public/images/cabwire.webp";
+import linkedcart from "../../public/images/linkedcart.webp";
+import benjalabs from "../../public/images/benjalabs.webp";
+import ohhfoundation from "../../public/images/ohhfoundation.webp";
+import pfhixtech from "../../public/images/pfhixtech.webp";
+import cresa from "../../public/images/cresa.webp";
 import saverlly from "../../public/images/saverlly-placeholder.svg";
-import hbs1 from "../../public/images/hbs1.png";
-import hbs2 from "../../public/images/hbs2.png";
-import hbs3 from "../../public/images/hbs3.png";
-import hbs4 from "../../public/images/hbs4.png";
+import hbs1 from "../../public/images/hbs1.webp";
+import hbs2 from "../../public/images/hbs2.webp";
+import hbs3 from "../../public/images/hbs3.webp";
+import hbs4 from "../../public/images/hbs4.webp";
+import az1 from "../../public/images/az1.webp";
+import az2 from "../../public/images/az2.webp";
+import az3 from "../../public/images/az3.webp";
+import az4 from "../../public/images/az4.webp";
 
 // COPY: review — every tagline, summary, highlight and body line below was
 // rewritten from the old long-form project descriptions.
@@ -43,6 +47,11 @@ export const projects: readonly Project[] = [
 		category: "Marketplace",
 		role: "CTO · architecture & full-stack build",
 		year: "2025 – now",
+		metrics: [
+			{ value: "14", label: "Phase system design, planned before product code" },
+			{ value: "10+", label: "Core tables in the Convex data model" },
+			{ value: "3", label: "Roles with their own dashboards: client, freelancer, admin" },
+		],
 		tagline:
 			"A high-trust freelance marketplace where clients pre-fund the work and hire only vetted talent.",
 		summary:
@@ -83,6 +92,11 @@ export const projects: readonly Project[] = [
 		category: "Travel · affiliate",
 		role: "Full-stack developer (contract)",
 		year: "2025",
+		metrics: [
+			{ value: "1,000+", label: "Partners the affiliate analytics were built to support" },
+			{ value: "50+", label: "Countries across the partner network" },
+			{ value: "7", label: "Travel products sold in one checkout" },
+		],
 		tagline:
 			"The partner platform for a travel marketplace that sells flights, hotels, activities and eSIMs in one checkout.",
 		summary:
@@ -108,6 +122,11 @@ export const projects: readonly Project[] = [
 		tier: "featured",
 		category: "Civic · operations",
 		role: "Design & full-stack build",
+		metrics: [
+			{ value: "~80%", label: "Less administrative overhead than paper roll calls" },
+			{ value: "1", label: "Valid check-in per member, per meeting" },
+			{ value: "3", label: "Scoped roles: member, group leader, super admin" },
+		],
 		tagline:
 			"QR check-ins and live dashboards that replaced paper roll calls for NYSC CDS groups in Akure South.",
 		summary:
@@ -143,7 +162,10 @@ export const projects: readonly Project[] = [
 		title: "Tickethub",
 		tier: "featured",
 		category: "Events · payments",
-		role: "Full-stack developer",
+		role: "Full-stack developer (personal project)",
+		metrics: [
+			{ value: "0", label: "Manual steps to refund every ticket when an event is cancelled" },
+		],
 		tagline:
 			"Event ticketing with seller onboarding, automated Paystack payouts and automatic refunds.",
 		summary:
@@ -176,8 +198,11 @@ export const projects: readonly Project[] = [
 		title: "Dishpatch",
 		tier: "featured",
 		category: "Logistics · real-time",
-		role: "Full-stack Next.js developer",
-		year: "2024 – now",
+		role: "Full-stack developer (contract)",
+		year: "2024",
+		metrics: [
+			{ value: "2", label: "Live portals, rider and restaurant, on one real-time data flow" },
+		],
 		tagline:
 			"A real-time delivery platform: rider, restaurant and admin apps running on one live data flow.",
 		summary:
@@ -210,22 +235,22 @@ export const projects: readonly Project[] = [
 		],
 	},
 	{
-		// TODO: confirm your role, the year, and the payment/auth stack for this build.
 		slug: "helens-beauty-secret",
 		title: "Helen's Beauty Secret",
 		tier: "selected",
 		category: "E-commerce · beauty",
-		role: "Full-stack developer",
+		role: "Full-stack developer (contract)",
+		year: "2026",
 		tagline:
 			"A storefront for a certified-organic skincare brand: shop, product pages, cart, accounts and a journal.",
 		summary:
 			"Helen's Beauty Secret sells professional, certified-organic skincare. The site has to feel as considered as the formulas, so it pairs an editorial dark-and-gold look with a full shopping flow: collection, detailed product pages, bag, customer accounts and a skincare journal.",
 		highlights: [
-			"Product pages built for scrutiny: full ingredient lists, usage guidance and reviews alongside the buy button.",
-			"A complete commerce flow (collection, bag, accounts) on Next.js with a Convex backend.",
-			"Editorial content (standards, philosophy, regimen guide, FAQ, journal) that sells the brand's rigour, not just its products.",
+			"Product catalogue, cart, checkout and order management for a direct-to-consumer brand, with payments integrated.",
+			"SEO built in: meta tags, structured data and image optimisation aimed at beauty and skincare searches.",
+			"A mobile-first storefront tuned for fast browsing and conversion on product pages.",
 		],
-		stack: ["Next.js", "TypeScript", "Convex", "Tailwind CSS"],
+		stack: ["Next.js", "TypeScript", "Convex", "Tailwind CSS", "shadcn/ui"],
 		links: [{ label: "helensbeautysecret.com", href: "https://www.helensbeautysecret.com" }],
 		cover: { src: hbs1, alt: "Helen's Beauty Secret home page: Radiance you can measure in the mirror" },
 		gallery: [
@@ -236,12 +261,40 @@ export const projects: readonly Project[] = [
 		],
 	},
 	{
+		slug: "aztran-global-investments",
+		title: "Aztran Global Investments",
+		tier: "selected",
+		category: "Finance · institutional site",
+		role: "Full-stack developer (contract)",
+		year: "2026",
+		// COPY: review — from your résumé and the live site.
+		tagline:
+			"The institutional website for an SEC-licensed Nigerian investment firm, with a research desk the team publishes to themselves.",
+		summary:
+			"Aztran manages assets and runs global markets and brokerage for high-net-worth individuals and corporates. I designed and built the site that presents all of it to institutional audiences, including an insights section where the team publishes their own research.",
+		highlights: [
+			"A CMS-driven insights section for macro reports, market reports, desk briefs, interviews and market recaps.",
+			"A performance-optimised, SEO-structured front end aimed at institutional and high-net-worth readers.",
+			"Production setup on Vercel with Cloudflare DNS and CDN for reliable, global delivery.",
+		],
+		metrics: [{ value: "5", label: "Research streams the team publishes to from the CMS" }],
+		stack: ["Next.js", "TypeScript", "Vercel", "Cloudflare"],
+		links: [{ label: "aztranlimited.com", href: "https://www.aztranlimited.com" }],
+		cover: { src: az1, alt: "Aztran Global Investments home page: Trading, Investments, Capital" },
+		gallery: [
+			{ src: az1, alt: "Aztran Global Investments home page" },
+			{ src: az2, alt: "Aztran services overview" },
+			{ src: az4, alt: "Aztran Asset Management service page" },
+			{ src: az3, alt: "Aztran Global Markets & Brokerage service page" },
+		],
+	},
+	{
 		slug: "cabwire",
 		title: "Cabwire",
 		tier: "selected",
 		category: "Mobility · launch",
 		role: "Frontend engineer (contract)",
-		year: "2025",
+		year: "2024",
 		tagline:
 			"Pre-launch site and waitlist for a ride-hailing platform launching across North America.",
 		summary:
@@ -270,7 +323,7 @@ export const projects: readonly Project[] = [
 		tier: "selected",
 		category: "Commerce · launch",
 		role: "Frontend engineer (contract)",
-		year: "2025",
+		year: "2024",
 		tagline:
 			"Pre-launch site and waitlist for an app that delivers from every store, mall and restaurant in a city.",
 		summary:
@@ -299,7 +352,7 @@ export const projects: readonly Project[] = [
 		tier: "selected",
 		category: "Finance · advisory",
 		role: "Full-stack developer (contract)",
-		year: "2025",
+		year: "2024",
 		tagline:
 			"A site for a finance research and advisory firm, with consultations booked straight into Google Calendar and Meet.",
 		summary:
@@ -319,7 +372,7 @@ export const projects: readonly Project[] = [
 		tier: "selected",
 		category: "Nonprofit · events",
 		role: "Full-stack developer (contract)",
-		year: "2025",
+		year: "2024",
 		tagline:
 			"An events and outreach platform for a nonprofit, with accounts for volunteers, donors and organizers.",
 		summary:
@@ -352,10 +405,11 @@ export const projects: readonly Project[] = [
 		title: "PfHix Technologies",
 		tier: "selected",
 		category: "Company site",
-		role: "Frontend developer (contract)",
-		year: "2025",
+		role: "Frontend developer (full-time)",
+		year: "2022 – 2023",
+		metrics: [{ value: "40%", label: "Faster page loads through image optimisation, lazy loading and bundle splitting" }],
 		tagline:
-			"A company site for a technology firm, with meetings booked directly through Google Calendar and Meet.",
+			"The public web platform for a security-solutions company, with meetings booked through Google Calendar and Meet.",
 		summary:
 			"A modular, maintainable company site built with shadcn/ui components, with meeting booking built in.",
 		highlights: [
@@ -373,6 +427,7 @@ export const projects: readonly Project[] = [
 		tier: "lab",
 		category: "Academic · final-year project",
 		role: "Final-year project",
+		year: "2023",
 		tagline:
 			"A project and thesis repository for the Department of Computer and Robotics Education, UNN.",
 		summary:
@@ -387,18 +442,44 @@ export const projects: readonly Project[] = [
 		gallery: [{ src: cresa, alt: "Cresa Repo home page" }],
 	},
 	{
-		// TODO: add Saverlly's live link, full write-up and screenshots.
+		// TODO: add Saverlly screenshots (and a live link once public) to promote it to a featured case study.
 		slug: "saverlly",
 		title: "Saverlly",
 		tier: "in-progress",
-		category: "Fintech · savings",
-		role: "Product & engineering",
+		category: "SaaS · retail savings",
+		role: "Full-stack developer (contract, US)",
+		year: "2026 – now",
+		// COPY: review — condensed from your Saverlly role description.
 		tagline:
-			"A savings app that helps people build consistent habits and reach their goals faster.",
+			"A multi-tenant SaaS platform that brings automatic coupon savings to US internet kiosk businesses.",
 		summary:
-			"Saverlly is a savings and personal finance product I'm building now. The full case study, screenshots and a live link are on the way.",
-		highlights: [],
-		stack: ["Next.js", "TypeScript", "Tailwind CSS"],
+			"Saverlly turns every checkout at a partner kiosk into a saving. I architected and built the whole system in one monorepo: a NestJS backend, two Next.js dashboards, a Chrome extension and a Windows desktop agent.",
+		highlights: [
+			"A Chrome extension that detects checkout on affiliated stores, tests the available coupon codes and applies the best one, tracking affiliate attribution per store and respecting step-down rules.",
+			"Per-order commission tracking with configurable per-kiosk revenue shares, a pending-to-confirmed lifecycle and automated kiosk-owner payouts through Stripe Connect.",
+			"A Windows agent for fleet deployment that uses Chrome enterprise policy to keep the extension installed through kiosk session resets, and shows on-screen announcements.",
+		],
+		body: [
+			"The Admin Console and Kiosk Portal are built with Next.js, TypeScript, shadcn/ui, Tailwind CSS, Zustand and TanStack Query, with role-based access and strict tenant isolation.",
+			"The platform is covered by unit and integration tests and documented with auto-generated OpenAPI/Swagger specs.",
+		],
+		metrics: [
+			{ value: "5", label: "Apps in one monorepo: API, two dashboards, extension, desktop agent" },
+			{ value: "5–30+", label: "Computers per kiosk location, deployed as a fleet" },
+			{ value: "30–90", label: "Day pending-to-confirmed commission lifecycle" },
+		],
+		stack: [
+			"NestJS",
+			"Next.js",
+			"TypeScript",
+			"Chrome Extension (MV3)",
+			"Stripe Connect",
+			"Zustand",
+			"TanStack Query",
+			"Tailwind CSS",
+			"shadcn/ui",
+			"OpenAPI",
+		],
 		links: [],
 		cover: { src: saverlly, alt: "Saverlly placeholder artwork" },
 		gallery: [],
@@ -417,8 +498,6 @@ export const nextProject = (slug: string) => {
 	const i = projects.findIndex((p) => p.slug === slug);
 	return projects[(i + 1) % projects.length];
 };
-
-export const shippedCount = projects.filter((p) => p.tier !== "in-progress").length;
 
 /** Every technology used, ordered by how many projects use it. */
 export const stackByUsage: readonly Tech[] = (() => {

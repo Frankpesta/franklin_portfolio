@@ -3,7 +3,7 @@ import Lenis from "lenis";
 import { createContext, type ReactNode, useCallback, useContext, useEffect, useMemo, useRef } from "react";
 import { DUR } from "./config";
 import { gsap, ScrollTrigger } from "./gsap";
-import { useReducedMotion } from "./hooks";
+import { flushDeferredMotion, useReducedMotion } from "./hooks";
 
 type ScrollApi = {
 	/** Scroll to an element, selector ("#work") or y offset. */
@@ -57,6 +57,11 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 	}, [reduce]);
 
 	const scrollTo = useCallback<ScrollApi["scrollTo"]>((target, opts) => {
+		if (typeof target === "string") {
+			// Jumping to an anchor: settle layout first (deferred setups can insert pin spacers above it).
+			flushDeferredMotion();
+			ScrollTrigger.refresh();
+		}
 		const lenis = lenisRef.current;
 		if (lenis) {
 			// Lenis caches the scroll limit; after a route change it still holds the old page's height.
@@ -68,6 +73,15 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 		if (typeof el === "number") window.scrollTo({ top: el, behavior: "instant" });
 		else el?.scrollIntoView({ behavior: "instant", block: "start" });
 	}, []);
+
+	// Arriving on a URL with a hash (e.g. /#contact): the browser jumps before
+	// deferred motion is set up, so jump again once layout is final.
+	useEffect(() => {
+		const hash = window.location.hash;
+		if (!hash || !document.querySelector(hash)) return;
+		const id = requestAnimationFrame(() => scrollTo(hash, { immediate: true }));
+		return () => cancelAnimationFrame(id);
+	}, [scrollTo]);
 
 	const lock = useCallback(() => {
 		locks.current += 1;

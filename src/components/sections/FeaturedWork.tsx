@@ -1,14 +1,10 @@
-"use client";
-import { useRef } from "react";
 import { SplitReveal } from "@/components/motion/SplitReveal";
-import { flipSourceFor, ProjectImage } from "@/components/ProjectImage";
+import { ProjectImage } from "@/components/ProjectImage";
 import { SectionLabel } from "@/components/SectionLabel";
 import { TransitionLink } from "@/components/TransitionLink";
 import { featuredProjects, projects, sheetNumber } from "@/content/projects";
 import type { Project } from "@/content/types";
-import { DUR, EASE, PLAY_ONCE, SCRUB, STAGGER } from "@/motion/config";
-import { gsap } from "@/motion/gsap";
-import { useMotion } from "@/motion/hooks";
+import { WorkSection } from "./motion";
 
 const total = String(projects.length).padStart(2, "0");
 
@@ -47,7 +43,7 @@ function Panel({ project }: { project: Project }) {
 
 				<TransitionLink
 					href={href}
-					flipSource={flipSourceFor(flipKey, project.slug)}
+					flip={{ key: flipKey, slug: project.slug }}
 					data-cursor="view"
 					className="group t-label mt-8 inline-flex w-fit items-center gap-3"
 				>
@@ -64,7 +60,7 @@ function Panel({ project }: { project: Project }) {
 			<div className="flex flex-col justify-center lg:col-span-7">
 				<TransitionLink
 					href={href}
-					flipSource={flipSourceFor(flipKey, project.slug)}
+					flip={{ key: flipKey, slug: project.slug }}
 					data-cursor="view"
 					tabIndex={-1}
 					aria-hidden
@@ -82,6 +78,17 @@ function Panel({ project }: { project: Project }) {
 					</span>
 				</TransitionLink>
 
+				{/* Pinned sheets have room for the figures, not the notes (those stay for stacked layouts). */}
+				{project.metrics && project.metrics.length > 0 && (
+					<dl className="mt-6 hidden grid-cols-3 gap-4 pin:grid">
+						{project.metrics.map((m) => (
+							<div key={m.label} className="flex flex-col gap-1 border-t border-line pt-3">
+								<dt className="t-label normal-case leading-snug tracking-normal text-muted">{m.label}</dt>
+								<dd className="order-first text-3xl font-extrabold tracking-tight">{m.value}</dd>
+							</div>
+						))}
+					</dl>
+				)}
 				<ol className="mt-8 grid gap-4 sm:grid-cols-3 pin:hidden">
 					{project.highlights.map((h, i) => (
 						<li key={h} className="work-note border-t border-line pt-3 text-sm leading-snug text-muted">
@@ -102,72 +109,8 @@ function Panel({ project }: { project: Project }) {
  * stack and reveal one by one.
  */
 export function FeaturedWork() {
-	const rootRef = useRef<HTMLElement>(null);
-
-	useMotion(
-		({ pin, reduce }) => {
-			const root = rootRef.current;
-			if (!root) return;
-			const track = root.querySelector<HTMLElement>(".work-track");
-			const pinEl = root.querySelector<HTMLElement>(".work-pin");
-			const panels = gsap.utils.toArray<HTMLElement>(".work-panel");
-			if (!track || !pinEl) return;
-
-			if (pin) {
-				const distance = () => track.scrollWidth - window.innerWidth;
-				const travel = gsap.to(track, {
-					x: () => -distance(),
-					ease: EASE.scrub,
-					scrollTrigger: {
-						trigger: pinEl,
-						pin: true,
-						start: "top top",
-						end: () => `+=${distance()}`,
-						scrub: SCRUB.tight,
-						invalidateOnRefresh: true,
-						anticipatePin: 1,
-					},
-				});
-				gsap.to(".work-progress", {
-					scaleX: 1,
-					ease: EASE.scrub,
-					scrollTrigger: { trigger: pinEl, start: "top top", end: () => `+=${distance()}`, scrub: true },
-				});
-				panels.forEach((panel) => {
-					gsap.fromTo(
-						panel.querySelector(".work-image"),
-						{ xPercent: -5, scale: 1.12 },
-						{
-							xPercent: 5,
-							scale: 1.12,
-							ease: EASE.scrub,
-							scrollTrigger: { containerAnimation: travel, trigger: panel, start: "left right", end: "right left", scrub: true },
-						},
-					);
-				});
-			}
-
-			if (!pin && !reduce) {
-				panels.forEach((panel) => {
-					const frame = panel.querySelector(".work-frame");
-					const image = panel.querySelector(".work-image");
-					if (!frame || !image) return;
-					gsap
-						.timeline({
-							scrollTrigger: { trigger: frame, start: "top 85%", ...PLAY_ONCE },
-							defaults: { duration: DUR.lg, ease: EASE.inOut },
-						})
-						.from(frame, { yPercent: 12, opacity: 0 })
-						.from(image, { scale: 1.2 }, 0)
-						.from(panel.querySelectorAll(".work-note"), { opacity: 0, y: 24, stagger: STAGGER.items }, "-=0.6");
-				});
-			}
-		},
-		{ scope: rootRef, defer: true },
-	);
-
 	return (
-		<section ref={rootRef} id="work" aria-labelledby="work-title" className="relative">
+		<WorkSection id="work" aria-labelledby="work-title" className="relative">
 			<div className="px-[var(--gutter)] pt-[clamp(4rem,8vw,7rem)]">
 				<SectionLabel index="02" title="Selected work" aside={`${String(featuredProjects.length).padStart(2, "0")} case studies`} />
 				<SplitReveal as="h2" id="work-title" className="t-h1 mt-10 max-w-[14ch]">
@@ -185,6 +128,6 @@ export function FeaturedWork() {
 					<div className="work-progress h-full origin-left scale-x-0 bg-accent" />
 				</div>
 			</div>
-		</section>
+		</WorkSection>
 	);
 }

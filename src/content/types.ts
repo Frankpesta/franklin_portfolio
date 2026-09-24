@@ -23,7 +23,13 @@ export type Tech =
 	| "Google Maps API"
 	| "Google Calendar API"
 	| "Google Cloud"
-	| "Three.js";
+	| "Three.js"
+	| "NestJS"
+	| "Stripe Connect"
+	| "Chrome Extension (MV3)"
+	| "OpenAPI"
+	| "Cloudflare"
+	| "Vercel";
 
 /** featured = full case study panel; selected/lab = index rows; in-progress = teased, no live link yet. */
 export type ProjectTier = "featured" | "selected" | "lab" | "in-progress";
@@ -31,6 +37,12 @@ export type ProjectTier = "featured" | "selected" | "lab" | "in-progress";
 export type ProjectImage = {
 	src: StaticImageData;
 	alt: string;
+};
+
+/** A figure worth leading with. Only ever sourced from Franklin's own material. */
+export type ProjectMetric = {
+	value: string;
+	label: string;
 };
 
 export type ProjectLink = {
@@ -55,6 +67,8 @@ export type Project = {
 	highlights: readonly string[];
 	/** Extra case-study paragraphs. */
 	body?: readonly string[];
+	/** Headline figures for the case study (one to three). */
+	metrics?: readonly ProjectMetric[];
 	stack: readonly Tech[];
 	links: readonly ProjectLink[];
 	cover: ProjectImage;

@@ -28,11 +28,3 @@ export function ProjectImage({ image, sizes, className, priority, flipKey, flipT
 		/>
 	);
 }
-
-/** Resolve a Flip source image in the DOM at click time. */
-export function flipSourceFor(flipKey: string, slug: string) {
-	return () => {
-		const image = document.querySelector<HTMLImageElement>(`img[data-flip-source="${flipKey}"]`);
-		return image && image.getBoundingClientRect().width > 0 ? { slug, image } : null;
-	};
-}
